@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Final Exam Prep - Study Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo">OS Final Exam Prep</h1>
+            <button class="menu-btn" id="menuBtn">☰ Menu</button>
+        </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Topics</h2>
+            <button class="close-btn" id="closeBtn">✕</button>
+        </div>
+        <ul class="nav-list">
+            <li><a href="#sync" class="nav-link active" data-chapter="sync">1. Process Synchronization</a></li>
+            <li><a href="#deadlock" class="nav-link" data-chapter="deadlock">2. Deadlocks</a></li>
+            <li><a href="#memory" class="nav-link" data-chapter="memory">3. Memory Management</a></li>
+            <li><a href="#virtual" class="nav-link" data-chapter="virtual">4. Virtual Memory</a></li>
+        </ul>
+    </nav>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Chapter 1: Process Synchronization -->
+            <section id="sync" class="chapter active">
+                <h2>Chapter 1: Process Synchronization</h2>
+                <p class="intro">Process synchronization is about making sure multiple programs don't mess up shared data at the same time. Think of it like a bathroom - only one person can use it at a time!</p>
+
+                <div class="topic">
+                    <h3>1.1 Mutex (Mutual Exclusion)</h3>
+                    <p><strong>What is it?</strong> A mutex is a lock that only one thread can hold at a time.</p>
+                    <p><strong>Real-world example:</strong> Imagine a printer in an office. Only one person can print at a time. If Person A is printing, Person B has to wait.</p>
+                    <div class="example">
+                        <strong>Simple Example:</strong>
+                        <pre>
+Thread A: Lock printer → Print document → Unlock printer
+Thread B: Waits... Waits... Lock printer (now available) → Print document → Unlock printer
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>1.2 Semaphores</h3>
+                    <p><strong>What is it?</strong> A semaphore is like a counter that controls how many threads can use something.</p>
+                    <p><strong>Real-world example:</strong> A parking lot with 5 spaces. When someone enters, the count goes down (5→4). When someone leaves, it goes up (4→5).</p>
+                    <div class="example">
+                        <strong>Two Types:</strong>
+                        <ul>
+                            <li><strong>Binary Semaphore:</strong> Can only be 0 or 1 (like a mutex)</li>
+                            <li><strong>Counting Semaphore:</strong> Can be any number (like parking spaces)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>1.3 Conditional Variables</h3>
+                    <p><strong>What is it?</strong> A way for threads to wait for a specific condition to happen.</p>
+                    <p><strong>Real-world example:</strong> Waiting in a restaurant. You put your name on a list and wait. When your table is ready, the host calls your name.</p>
+                    <div class="example">
+                        <strong>How it works:</strong>
+                        <pre>
+Thread 1: Wait for condition "table is ready"
+Thread 2: Table becomes ready → Signal to Thread 1
+Thread 1: Wakes up and gets seated
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>1.4 Producer-Consumer Problem</h3>
+                    <p><strong>What is it?</strong> One thread makes data (producer), another uses it (consumer).</p>
+                    <p><strong>Real-world example:</strong> A bakery. The baker (producer) makes bread. The customer (consumer) buys it. If the baker is too fast, bread piles up. If too slow, customers wait.</p>
+                    <div class="example">
+                        <strong>The Problem:</strong>
+                        <ul>
+                            <li>Buffer is full → Producer must wait</li>
+                            <li>Buffer is empty → Consumer must wait</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>1.5 Bounded-Buffer Problem</h3>
+                    <p><strong>What is it?</strong> Same as producer-consumer but with a limited buffer size.</p>
+                    <p><strong>Real-world example:</strong> A YouTube video buffer. It can only hold so much data. If you're downloading faster than watching, it fills up.</p>
+                </div>
+
+                <div class="topic">
+                    <h3>1.6 Reader-Writer Problem</h3>
+                    <p><strong>What is it?</strong> Multiple readers can read at the same time, but only one writer can write.</p>
+                    <p><strong>Real-world example:</strong> A library. Many people can read books at the same time, but only the librarian can update the catalog.</p>
+                    <div class="example">
+                        <strong>Rules:</strong>
+                        <ul>
+                            <li>Multiple readers: ✓ Allowed</li>
+                            <li>One writer: ✓ Allowed</li>
+                            <li>Reader + Writer: ✗ Not allowed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>1.7 Dining-Philosophers Problem</h3>
+                    <p><strong>What is it?</strong> A classic problem about deadlock and resource sharing.</p>
+                    <p><strong>The Setup:</strong> 5 philosophers sit at a round table. Between each pair is one chopstick. To eat, a philosopher needs BOTH chopsticks.</p>
+                    <div class="example">
+                        <strong>The Problem:</strong>
+                        <pre>
+Philosopher 1: Takes left chopstick, waits for right
+Philosopher 2: Takes left chopstick, waits for right
+Philosopher 3: Takes left chopstick, waits for right
+... Everyone is stuck! No one can eat!
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>1.8 H2O Problem</h3>
+                    <p><strong>What is it?</strong> Synchronizing threads to form water molecules (H₂O).</p>
+                    <p><strong>The Challenge:</strong> You need 2 Hydrogen atoms and 1 Oxygen atom to make water. Synchronize them so they meet at the right time.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 2: Deadlocks -->
+            <section id="deadlock" class="chapter">
+                <h2>Chapter 2: Deadlocks</h2>
+                <p class="intro">A deadlock happens when processes get stuck waiting for each other forever. Like two cars facing each other on a narrow road - neither can move!</p>
+
+                <div class="topic">
+                    <h3>2.1 What is a Deadlock?</h3>
+                    <p><strong>Simple Definition:</strong> Two or more processes are stuck because each is waiting for something the other has.</p>
+                    <div class="example">
+                        <strong>Real-world example:</strong>
+                        <pre>
+Process A: Has Resource 1, wants Resource 2
+Process B: Has Resource 2, wants Resource 1
+Result: Both stuck forever!
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>2.2 Four Conditions for Deadlock</h3>
+                    <p><strong>ALL FOUR must be true for deadlock to happen:</strong></p>
+                    <div class="example">
+                        <ol>
+                            <li><strong>Mutual Exclusion:</strong> Only one process can use a resource at a time</li>
+                            <li><strong>Hold and Wait:</strong> Process holds a resource while waiting for another</li>
+                            <li><strong>No Preemption:</strong> Can't take a resource away from a process</li>
+                            <li><strong>Circular Wait:</strong> Processes form a circle waiting for each other</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>2.3 How to Prevent Deadlock</h3>
+                    <p><strong>Break one of the four conditions:</strong></p>
+                    <div class="example">
+                        <ul>
+                            <li><strong>Break Mutual Exclusion:</strong> Let multiple processes share resources (not always possible)</li>
+                            <li><strong>Break Hold and Wait:</strong> Request all resources at once before starting</li>
+                            <li><strong>Break No Preemption:</strong> Allow taking resources away from processes</li>
+                            <li><strong>Break Circular Wait:</strong> Number resources and always request in order</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>2.4 Deadlock Avoidance</h3>
+                    <p><strong>What is it?</strong> Before giving a resource, check if it's safe. If it might cause deadlock, say "no".</p>
+                    <p><strong>Tool:</strong> Banker's Algorithm - like a bank checking if a loan is safe</p>
+                </div>
+
+                <div class="topic">
+                    <h3>2.5 Deadlock Detection</h3>
+                    <p><strong>What is it?</strong> Let deadlock happen, then detect it and fix it.</p>
+                    <p><strong>How:</strong> Check if processes form a waiting circle. If yes, deadlock detected!</p>
+                </div>
+            </section>
+
+            <!-- Chapter 3: Memory Management -->
+            <section id="memory" class="chapter">
+                <h2>Chapter 3: Memory Management</h2>
+                <p class="intro">Memory management is about organizing computer memory so programs can use it efficiently. Like organizing shelves in a library!</p>
+
+                <div class="topic">
+                    <h3>3.1 Contiguous Memory Allocation</h3>
+                    <p><strong>What is it?</strong> Each program gets one continuous block of memory.</p>
+                    <p><strong>Real-world example:</strong> Assigning apartments in a building. Person A gets apartments 1-5, Person B gets apartments 6-10.</p>
+                    <div class="example">
+                        <strong>Pros:</strong> Simple and fast
+                        <strong>Cons:</strong> Wastes space (fragmentation)
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>3.2 Segmentation</h3>
+                    <p><strong>What is it?</strong> Memory divided into logical pieces (code, data, stack).</p>
+                    <p><strong>Real-world example:</strong> A house with rooms. Living room, bedroom, kitchen - each serves a purpose.</p>
+                    <div class="example">
+                        <strong>Benefits:</strong>
+                        <ul>
+                            <li>Makes sense logically</li>
+                            <li>Easy to protect different parts</li>
+                            <li>Can share segments between programs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>3.3 Paging</h3>
+                    <p><strong>What is it?</strong> Memory divided into fixed-size pages (usually 4KB).</p>
+                    <p><strong>Real-world example:</strong> A notebook with pages. Each page is the same size. You can use pages in any order.</p>
+                    <div class="example">
+                        <strong>Key Idea:</strong>
+                        <pre>
+Logical Address = Page Number + Offset
+Physical Address = Frame Number + Offset
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>3.4 Paged-Segmentation</h3>
+                    <p><strong>What is it?</strong> Combines paging and segmentation. Segments are divided into pages.</p>
+                    <p><strong>Best of both worlds:</strong> Logical organization of segmentation + efficiency of paging</p>
+                </div>
+
+                <div class="topic">
+                    <h3>3.5 Fragmentation</h3>
+                    <p><strong>External Fragmentation:</strong> Free memory scattered everywhere. Total free space exists, but it's not continuous.</p>
+                    <div class="example">
+                        <strong>Example:</strong>
+                        <pre>
+Memory: [Used][Free 2KB][Used][Free 3KB][Used][Free 1KB]
+Total free: 6KB, but can't fit a 5KB program!
+                        </pre>
+                    </div>
+                    <p><strong>Internal Fragmentation:</strong> Allocated memory is bigger than needed. Wasted space inside the allocation.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 4: Virtual Memory -->
+            <section id="virtual" class="chapter">
+                <h2>Chapter 4: Virtual Memory</h2>
+                <p class="intro">Virtual memory lets programs use more memory than physically available. The OS swaps data between RAM and disk automatically!</p>
+
+                <div class="topic">
+                    <h3>4.1 What is Virtual Memory?</h3>
+                    <p><strong>Simple Idea:</strong> Programs think they have tons of memory. The OS manages what's actually in RAM vs. on disk.</p>
+                    <p><strong>Real-world example:</strong> Your computer has 8GB RAM but can run programs needing 100GB total. How? Some data is on the hard drive.</p>
+                </div>
+
+                <div class="topic">
+                    <h3>4.2 Demand Paging</h3>
+                    <p><strong>What is it?</strong> Only load data into RAM when the program needs it.</p>
+                    <div class="example">
+                        <strong>How it works:</strong>
+                        <pre>
+1. Program accesses memory location
+2. Location not in RAM → Page Fault!
+3. OS loads page from disk to RAM
+4. Program continues
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>4.3 Page Replacement Algorithms</h3>
+                    <p><strong>The Problem:</strong> RAM is full. Need to load a new page. Which old page should we remove?</p>
+                    <div class="example">
+                        <strong>Three Popular Algorithms:</strong>
+                        <ul>
+                            <li><strong>FIFO (First-In-First-Out):</strong> Remove the oldest page. Simple but not smart.</li>
+                            <li><strong>LRU (Least Recently Used):</strong> Remove the page not used for longest time. Better!</li>
+                            <li><strong>LFU (Least Frequently Used):</strong> Remove the page used least often. Also good!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>4.4 Performance of Virtual Memory</h3>
+                    <p><strong>Formula:</strong> Effective Access Time (EAT)</p>
+                    <div class="example">
+                        <pre>
+EAT = (1 - p) × m + p × (d + m)
+
+p = page fault rate (0 to 1)
+m = memory access time (fast, ~100 ns)
+d = disk access time (slow, ~8 ms)
+
+Example: If p = 0.001 (0.1% page faults)
+EAT = 0.999 × 100 + 0.001 × 8100 = 107 ns
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>4.5 Thrashing</h3>
+                    <p><strong>What is it?</strong> System spends more time swapping pages than actually running programs.</p>
+                    <p><strong>Real-world example:</strong> Your computer is constantly using the hard drive, programs run very slowly.</p>
+                    <div class="example">
+                        <strong>Causes:</strong>
+                        <ul>
+                            <li>Too many programs running</li>
+                            <li>Not enough RAM</li>
+                            <li>Poor page replacement algorithm</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="topic">
+                    <h3>4.6 Copy-on-Write</h3>
+                    <p><strong>What is it?</strong> When a program creates a copy, don't actually copy data yet. Only copy when data is modified.</p>
+                    <p><strong>Real-world example:</strong> Making a photocopy. Don't copy everything - only copy the pages someone changes.</p>
+                </div>
+
+                <div class="topic">
+                    <h3>4.7 Non-Uniform Memory Access (NUMA)</h3>
+                    <p><strong>What is it?</strong> In multi-processor systems, some memory is closer to some processors.</p>
+                    <p><strong>Real-world example:</strong> In an apartment building, the mailbox near your door is faster to access than one far away.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
