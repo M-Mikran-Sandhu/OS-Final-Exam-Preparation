@@ -3,340 +3,1553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OS Final Exam Prep - Study Guide</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Operating Systems Exam Preparation - Complete Guide</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <h1 class="logo">OS Final Exam Prep</h1>
-            <button class="menu-btn" id="menuBtn">☰ Menu</button>
-        </div>
-    </header>
-
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2>Topics</h2>
-            <button class="close-btn" id="closeBtn">✕</button>
-        </div>
-        <ul class="nav-list">
-            <li><a href="#sync" class="nav-link active" data-chapter="sync">1. Process Synchronization</a></li>
-            <li><a href="#deadlock" class="nav-link" data-chapter="deadlock">2. Deadlocks</a></li>
-            <li><a href="#memory" class="nav-link" data-chapter="memory">3. Memory Management</a></li>
-            <li><a href="#virtual" class="nav-link" data-chapter="virtual">4. Virtual Memory</a></li>
-        </ul>
-    </nav>
-
-    <!-- Overlay for mobile -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Chapter 1: Process Synchronization -->
-            <section id="sync" class="chapter active">
-                <h2>Chapter 1: Process Synchronization</h2>
-                <p class="intro">Process synchronization is about making sure multiple programs don't mess up shared data at the same time. Think of it like a bathroom - only one person can use it at a time!</p>
-
-                <div class="topic">
-                    <h3>1.1 Mutex (Mutual Exclusion)</h3>
-                    <p><strong>What is it?</strong> A mutex is a lock that only one thread can hold at a time.</p>
-                    <p><strong>Real-world example:</strong> Imagine a printer in an office. Only one person can print at a time. If Person A is printing, Person B has to wait.</p>
-                    <div class="example">
-                        <strong>Simple Example:</strong>
-                        <pre>
-Thread A: Lock printer → Print document → Unlock printer
-Thread B: Waits... Waits... Lock printer (now available) → Print document → Unlock printer
-                        </pre>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">OS Exam Prep</h1>
+                <button class="toggle-sidebar" id="toggleSidebar">☰</button>
+            </div>
+            <ul class="nav-list">
+                <li><a href="#chapter1" class="nav-link active" data-chapter="1">Chapter 1: Introduction</a></li>
+                <li><a href="#chapter2" class="nav-link" data-chapter="2">Chapter 2: OS Services</a></li>
+                <li><a href="#chapter3" class="nav-link" data-chapter="3">Chapter 3: Process Management</a></li>
+                <li><a href="#chapter4" class="nav-link" data-chapter="4">Chapter 4: IPC</a></li>
+                <li><a href="#chapter5" class="nav-link" data-chapter="5">Chapter 5: CPU Scheduling</a></li>
+                <li><a href="#chapter6" class="nav-link" data-chapter="6">Chapter 6: Threads</a></li>
+                <li><a href="#chapter7" class="nav-link" data-chapter="7">Chapter 7: Process Synchronization</a></li>
+                <li><a href="#chapter8" class="nav-link" data-chapter="8">Chapter 8: Memory Management</a></li>
+                <li><a href="#chapter9" class="nav-link" data-chapter="9">Chapter 9: Deadlock</a></li>
+                <li><a href="#chapter10" class="nav-link" data-chapter="10">Chapter 10: Dining Philosophers</a></li>
+                <li><a href="#final-quiz" class="nav-link" data-chapter="final">Final Assessment</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="progress-indicator">
+                    <p>Progress: <span id="progressPercent">0</span>%</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
                     </div>
                 </div>
+            </div>
+        </nav>
 
-                <div class="topic">
-                    <h3>1.2 Semaphores</h3>
-                    <p><strong>What is it?</strong> A semaphore is like a counter that controls how many threads can use something.</p>
-                    <p><strong>Real-world example:</strong> A parking lot with 5 spaces. When someone enters, the count goes down (5→4). When someone leaves, it goes up (4→5).</p>
-                    <div class="example">
-                        <strong>Two Types:</strong>
-                        <ul>
-                            <li><strong>Binary Semaphore:</strong> Can only be 0 or 1 (like a mutex)</li>
-                            <li><strong>Counting Semaphore:</strong> Can be any number (like parking spaces)</li>
-                        </ul>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Operating Systems Exam Preparation</h1>
+                <p class="subtitle">Comprehensive Study Guide for All Topics</p>
+            </header>
+
+            <!-- Chapter 1: Introduction -->
+            <section id="chapter1" class="chapter">
+                <h2>Chapter 1: Introduction to the Course</h2>
+                
+                <div class="section-content">
+                    <h3>1.1 What is an Operating System?</h3>
+                    <p>An Operating System (OS) is a software that acts as an intermediary between the user and the computer hardware. It manages all the hardware resources and provides services to application programs. The OS controls the execution of all kinds of programs and makes the computing system convenient to use.</p>
+                    <p><strong>Key Functions:</strong></p>
+                    <ul>
+                        <li>Resource management (CPU, memory, I/O devices)</li>
+                        <li>Process and thread management</li>
+                        <li>Memory management</li>
+                        <li>File system management</li>
+                        <li>Device management</li>
+                        <li>Security and protection</li>
+                    </ul>
+
+                    <h3>1.2 Why do we need an OS?</h3>
+                    <p>Operating systems are essential for several reasons:</p>
+                    <ul>
+                        <li><strong>Hardware Abstraction:</strong> Provides a uniform interface to diverse hardware</li>
+                        <li><strong>Resource Allocation:</strong> Efficiently distributes CPU, memory, and I/O resources</li>
+                        <li><strong>Process Management:</strong> Manages multiple processes running simultaneously</li>
+                        <li><strong>Security:</strong> Protects data and resources from unauthorized access</li>
+                        <li><strong>User Interface:</strong> Provides convenient way to interact with computer</li>
+                        <li><strong>File Management:</strong> Organizes and manages data storage</li>
+                    </ul>
+
+                    <h3>1.3 System Boot</h3>
+                    <p>System boot is the process of starting up a computer and loading the operating system into memory. The boot process involves:</p>
+                    <ol>
+                        <li><strong>Power-on:</strong> CPU executes firmware code from ROM</li>
+                        <li><strong>POST (Power-On Self Test):</strong> Hardware diagnostics run</li>
+                        <li><strong>Bootloader:</strong> Loads the OS kernel into memory</li>
+                        <li><strong>Kernel Initialization:</strong> OS initializes system resources</li>
+                        <li><strong>System Services:</strong> Background services and daemons start</li>
+                        <li><strong>User Login:</strong> System ready for user interaction</li>
+                    </ol>
+
+                    <h3>1.4 Computer-System Architecture</h3>
+                    <p>Modern computer systems consist of several key components:</p>
+                    <ul>
+                        <li><strong>CPU (Central Processing Unit):</strong> Executes instructions</li>
+                        <li><strong>Memory:</strong> RAM for temporary storage, ROM for firmware</li>
+                        <li><strong>I/O Devices:</strong> Input/output controllers and devices</li>
+                        <li><strong>System Bus:</strong> Connects all components</li>
+                        <li><strong>Storage:</strong> Permanent data storage (HDD, SSD)</li>
+                    </ul>
+
+                    <h3>1.5 Operating System Concepts</h3>
+                    <p><strong>Multiprogramming:</strong> Multiple programs loaded in memory simultaneously, OS switches between them</p>
+                    <p><strong>Multitasking:</strong> CPU rapidly switches between tasks, giving appearance of parallel execution</p>
+                    <p><strong>Multiprocessing:</strong> Multiple CPUs work simultaneously on different tasks</p>
+
+                    <h3>1.6 Interrupts</h3>
+                    <p><strong>Hardware Interrupts:</strong> Generated by hardware devices (I/O, timer)</p>
+                    <p><strong>Software Interrupts:</strong> Generated by executing software instructions (system calls)</p>
+                    <p><strong>Exceptions:</strong> Unusual conditions during program execution (division by zero, page fault)</p>
+
+                    <h3>1.7 Interrupt Service Mechanism</h3>
+                    <p>When an interrupt occurs:</p>
+                    <ol>
+                        <li>CPU stops current execution</li>
+                        <li>Saves current state (registers, program counter)</li>
+                        <li>Identifies interrupt source</li>
+                        <li>Executes Interrupt Service Routine (ISR)</li>
+                        <li>Restores saved state and resumes execution</li>
+                    </ol>
+
+                    <h3>1.8 Protection Mechanisms</h3>
+                    <p><strong>Memory Protection:</strong> Prevents one process from accessing another's memory</p>
+                    <p><strong>I/O Protection:</strong> Only OS can directly access I/O devices</p>
+                    <p><strong>CPU Protection:</strong> Timer interrupts prevent process monopolizing CPU</p>
+
+                    <h3>1.9 Dual-mode of Operation</h3>
+                    <p><strong>User Mode:</strong> Restricted execution mode for applications</p>
+                    <p><strong>Kernel Mode:</strong> Privileged mode for OS with full hardware access</p>
+                    <p>Mode switching occurs via system calls and interrupts.</p>
+                </div>
+
+                <!-- Quiz for Chapter 1 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 1</h3>
+                    <div class="quiz" id="quiz1">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> Which of the following is NOT a primary function of an Operating System?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) Resource management</label>
+                                <label><input type="radio" name="q1" value="b"> b) Compiling source code</label>
+                                <label><input type="radio" name="q1" value="c"> c) Process management</label>
+                                <label><input type="radio" name="q1" value="d"> d) Memory management</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Compiling source code</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What is the purpose of the bootloader?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Load the OS kernel into memory</label>
+                                <label><input type="radio" name="q2" value="b"> b) Compile the OS</label>
+                                <label><input type="radio" name="q2" value="c"> c) Manage user accounts</label>
+                                <label><input type="radio" name="q2" value="d"> d) Handle file I/O</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: a) Load the OS kernel into memory</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> What is the difference between multiprogramming and multitasking?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) They are the same thing</label>
+                                <label><input type="radio" name="q3" value="b"> b) Multiprogramming loads multiple programs; multitasking rapidly switches between them</label>
+                                <label><input type="radio" name="q3" value="c"> c) Multitasking uses multiple CPUs</label>
+                                <label><input type="radio" name="q3" value="d"> d) Multiprogramming is for servers only</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Multiprogramming loads multiple programs; multitasking rapidly switches between them</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> Which type of interrupt is generated by hardware devices?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) Software interrupt</label>
+                                <label><input type="radio" name="q4" value="b"> b) Hardware interrupt</label>
+                                <label><input type="radio" name="q4" value="c"> c) Exception</label>
+                                <label><input type="radio" name="q4" value="d"> d) Trap</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Hardware interrupt</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What is the primary purpose of memory protection?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) Increase memory speed</label>
+                                <label><input type="radio" name="q5" value="b"> b) Prevent one process from accessing another's memory</label>
+                                <label><input type="radio" name="q5" value="c"> c) Compress memory usage</label>
+                                <label><input type="radio" name="q5" value="d"> d) Reduce power consumption</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Prevent one process from accessing another's memory</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz1', ['b', 'a', 'b', 'b', 'b'])">Submit Quiz</button>
                     </div>
-                </div>
-
-                <div class="topic">
-                    <h3>1.3 Conditional Variables</h3>
-                    <p><strong>What is it?</strong> A way for threads to wait for a specific condition to happen.</p>
-                    <p><strong>Real-world example:</strong> Waiting in a restaurant. You put your name on a list and wait. When your table is ready, the host calls your name.</p>
-                    <div class="example">
-                        <strong>How it works:</strong>
-                        <pre>
-Thread 1: Wait for condition "table is ready"
-Thread 2: Table becomes ready → Signal to Thread 1
-Thread 1: Wakes up and gets seated
-                        </pre>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>1.4 Producer-Consumer Problem</h3>
-                    <p><strong>What is it?</strong> One thread makes data (producer), another uses it (consumer).</p>
-                    <p><strong>Real-world example:</strong> A bakery. The baker (producer) makes bread. The customer (consumer) buys it. If the baker is too fast, bread piles up. If too slow, customers wait.</p>
-                    <div class="example">
-                        <strong>The Problem:</strong>
-                        <ul>
-                            <li>Buffer is full → Producer must wait</li>
-                            <li>Buffer is empty → Consumer must wait</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>1.5 Bounded-Buffer Problem</h3>
-                    <p><strong>What is it?</strong> Same as producer-consumer but with a limited buffer size.</p>
-                    <p><strong>Real-world example:</strong> A YouTube video buffer. It can only hold so much data. If you're downloading faster than watching, it fills up.</p>
-                </div>
-
-                <div class="topic">
-                    <h3>1.6 Reader-Writer Problem</h3>
-                    <p><strong>What is it?</strong> Multiple readers can read at the same time, but only one writer can write.</p>
-                    <p><strong>Real-world example:</strong> A library. Many people can read books at the same time, but only the librarian can update the catalog.</p>
-                    <div class="example">
-                        <strong>Rules:</strong>
-                        <ul>
-                            <li>Multiple readers: ✓ Allowed</li>
-                            <li>One writer: ✓ Allowed</li>
-                            <li>Reader + Writer: ✗ Not allowed</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>1.7 Dining-Philosophers Problem</h3>
-                    <p><strong>What is it?</strong> A classic problem about deadlock and resource sharing.</p>
-                    <p><strong>The Setup:</strong> 5 philosophers sit at a round table. Between each pair is one chopstick. To eat, a philosopher needs BOTH chopsticks.</p>
-                    <div class="example">
-                        <strong>The Problem:</strong>
-                        <pre>
-Philosopher 1: Takes left chopstick, waits for right
-Philosopher 2: Takes left chopstick, waits for right
-Philosopher 3: Takes left chopstick, waits for right
-... Everyone is stuck! No one can eat!
-                        </pre>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>1.8 H2O Problem</h3>
-                    <p><strong>What is it?</strong> Synchronizing threads to form water molecules (H₂O).</p>
-                    <p><strong>The Challenge:</strong> You need 2 Hydrogen atoms and 1 Oxygen atom to make water. Synchronize them so they meet at the right time.</p>
                 </div>
             </section>
 
-            <!-- Chapter 2: Deadlocks -->
-            <section id="deadlock" class="chapter">
-                <h2>Chapter 2: Deadlocks</h2>
-                <p class="intro">A deadlock happens when processes get stuck waiting for each other forever. Like two cars facing each other on a narrow road - neither can move!</p>
+            <!-- Chapter 2: Operating System Services -->
+            <section id="chapter2" class="chapter">
+                <h2>Chapter 2: Operating System Services</h2>
+                
+                <div class="section-content">
+                    <h3>2.1 User Interface</h3>
+                    <p>The OS provides interfaces for users to interact with the computer system.</p>
+                    
+                    <h4>Command Line Interface (CLI)</h4>
+                    <p>Users type commands to interact with the OS. Examples: bash, cmd.exe, PowerShell</p>
+                    <ul>
+                        <li>Direct control over system</li>
+                        <li>Powerful for automation</li>
+                        <li>Steep learning curve</li>
+                    </ul>
 
-                <div class="topic">
-                    <h3>2.1 What is a Deadlock?</h3>
-                    <p><strong>Simple Definition:</strong> Two or more processes are stuck because each is waiting for something the other has.</p>
-                    <div class="example">
-                        <strong>Real-world example:</strong>
-                        <pre>
-Process A: Has Resource 1, wants Resource 2
-Process B: Has Resource 2, wants Resource 1
-Result: Both stuck forever!
-                        </pre>
+                    <h4>Graphical User Interface (GUI)</h4>
+                    <p>Visual interface with windows, icons, and menus. Examples: Windows Desktop, macOS, GNOME</p>
+                    <ul>
+                        <li>User-friendly and intuitive</li>
+                        <li>Visual representation of files and programs</li>
+                        <li>Point-and-click interaction</li>
+                    </ul>
+
+                    <h3>2.2 Programmer Interface</h3>
+                    <p><strong>API (Application Programming Interface):</strong> Set of functions and protocols for building applications</p>
+                    <p><strong>System Calls:</strong> Interface between user programs and OS kernel</p>
+                    <p>System calls provide access to OS services like file I/O, process creation, and memory allocation.</p>
+
+                    <h3>2.3 Operating System Design</h3>
+                    <p>OS design involves deciding how to structure the system for efficiency and maintainability.</p>
+
+                    <h4>Simple Structure</h4>
+                    <p>No clear structure, monolithic kernel. Example: Early MS-DOS</p>
+                    <ul>
+                        <li>Limited functionality</li>
+                        <li>Poor isolation between components</li>
+                        <li>Difficult to maintain</li>
+                    </ul>
+
+                    <h4>Monolithic Kernel</h4>
+                    <p>Entire OS runs in kernel mode as a single program</p>
+                    <ul>
+                        <li>Fast performance</li>
+                        <li>Difficult to debug and maintain</li>
+                        <li>One bug can crash entire system</li>
+                        <li>Examples: Linux, Unix</li>
+                    </ul>
+
+                    <h4>Microkernel</h4>
+                    <p>Only essential services in kernel; other services run as user-level processes</p>
+                    <ul>
+                        <li>Better modularity and reliability</li>
+                        <li>Easier to extend and maintain</li>
+                        <li>More context switches (performance overhead)</li>
+                        <li>Examples: QNX, MINIX</li>
+                    </ul>
+
+                    <h4>Layered Architecture</h4>
+                    <p>OS organized in layers, each using services from lower layers</p>
+                    <ul>
+                        <li>Clear separation of concerns</li>
+                        <li>Easier to understand and debug</li>
+                        <li>Performance overhead from layer crossing</li>
+                    </ul>
+
+                    <h4>Modular Structure</h4>
+                    <p>Core kernel with loadable modules for additional functionality</p>
+                    <ul>
+                        <li>Flexibility to add/remove features</li>
+                        <li>Better than monolithic for maintenance</li>
+                        <li>Examples: Modern Linux kernels</li>
+                    </ul>
+
+                    <h4>Hybrid Systems</h4>
+                    <p>Combination of microkernel and monolithic approaches</p>
+                    <ul>
+                        <li><strong>Mac OS X:</strong> XNU kernel (hybrid of Mach microkernel and BSD monolithic)</li>
+                        <li><strong>iOS:</strong> Based on Mac OS X architecture</li>
+                        <li><strong>Android:</strong> Linux kernel with custom framework</li>
+                    </ul>
+                </div>
+
+                <!-- Quiz for Chapter 2 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 2</h3>
+                    <div class="quiz" id="quiz2">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> Which interface is more user-friendly for beginners?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) CLI</label>
+                                <label><input type="radio" name="q1" value="b"> b) GUI</label>
+                                <label><input type="radio" name="q1" value="c"> c) API</label>
+                                <label><input type="radio" name="q1" value="d"> d) System calls</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) GUI</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What is the primary advantage of a microkernel architecture?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Faster performance</label>
+                                <label><input type="radio" name="q2" value="b"> b) Better modularity and reliability</label>
+                                <label><input type="radio" name="q2" value="c"> c) Simpler design</label>
+                                <label><input type="radio" name="q2" value="d"> d) Easier to learn</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Better modularity and reliability</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> Which OS uses a hybrid kernel architecture?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) Windows</label>
+                                <label><input type="radio" name="q3" value="b"> b) Mac OS X</label>
+                                <label><input type="radio" name="q3" value="c"> c) Linux</label>
+                                <label><input type="radio" name="q3" value="d"> d) Unix</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Mac OS X</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What is a system call?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) A function call within a program</label>
+                                <label><input type="radio" name="q4" value="b"> b) Interface between user programs and OS kernel</label>
+                                <label><input type="radio" name="q4" value="c"> c) A type of interrupt</label>
+                                <label><input type="radio" name="q4" value="d"> d) A hardware command</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Interface between user programs and OS kernel</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> Which architecture has the main disadvantage of performance overhead?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) Monolithic</label>
+                                <label><input type="radio" name="q5" value="b"> b) Microkernel</label>
+                                <label><input type="radio" name="q5" value="c"> c) Simple</label>
+                                <label><input type="radio" name="q5" value="d"> d) Modular</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Microkernel</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz2', ['b', 'b', 'b', 'b', 'b'])">Submit Quiz</button>
                     </div>
-                </div>
-
-                <div class="topic">
-                    <h3>2.2 Four Conditions for Deadlock</h3>
-                    <p><strong>ALL FOUR must be true for deadlock to happen:</strong></p>
-                    <div class="example">
-                        <ol>
-                            <li><strong>Mutual Exclusion:</strong> Only one process can use a resource at a time</li>
-                            <li><strong>Hold and Wait:</strong> Process holds a resource while waiting for another</li>
-                            <li><strong>No Preemption:</strong> Can't take a resource away from a process</li>
-                            <li><strong>Circular Wait:</strong> Processes form a circle waiting for each other</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>2.3 How to Prevent Deadlock</h3>
-                    <p><strong>Break one of the four conditions:</strong></p>
-                    <div class="example">
-                        <ul>
-                            <li><strong>Break Mutual Exclusion:</strong> Let multiple processes share resources (not always possible)</li>
-                            <li><strong>Break Hold and Wait:</strong> Request all resources at once before starting</li>
-                            <li><strong>Break No Preemption:</strong> Allow taking resources away from processes</li>
-                            <li><strong>Break Circular Wait:</strong> Number resources and always request in order</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>2.4 Deadlock Avoidance</h3>
-                    <p><strong>What is it?</strong> Before giving a resource, check if it's safe. If it might cause deadlock, say "no".</p>
-                    <p><strong>Tool:</strong> Banker's Algorithm - like a bank checking if a loan is safe</p>
-                </div>
-
-                <div class="topic">
-                    <h3>2.5 Deadlock Detection</h3>
-                    <p><strong>What is it?</strong> Let deadlock happen, then detect it and fix it.</p>
-                    <p><strong>How:</strong> Check if processes form a waiting circle. If yes, deadlock detected!</p>
                 </div>
             </section>
 
-            <!-- Chapter 3: Memory Management -->
-            <section id="memory" class="chapter">
-                <h2>Chapter 3: Memory Management</h2>
-                <p class="intro">Memory management is about organizing computer memory so programs can use it efficiently. Like organizing shelves in a library!</p>
+            <!-- Chapter 3: Process Management -->
+            <section id="chapter3" class="chapter">
+                <h2>Chapter 3: Process Management</h2>
+                
+                <div class="section-content">
+                    <h3>3.1 Process States</h3>
+                    <p>A process goes through several states during its lifetime:</p>
+                    <ul>
+                        <li><strong>New:</strong> Process is being created</li>
+                        <li><strong>Running:</strong> Process is executing on CPU</li>
+                        <li><strong>Waiting:</strong> Process waiting for I/O or event</li>
+                        <li><strong>Ready:</strong> Process ready to run, waiting for CPU</li>
+                        <li><strong>Terminated:</strong> Process has finished execution</li>
+                    </ul>
 
-                <div class="topic">
-                    <h3>3.1 Contiguous Memory Allocation</h3>
-                    <p><strong>What is it?</strong> Each program gets one continuous block of memory.</p>
-                    <p><strong>Real-world example:</strong> Assigning apartments in a building. Person A gets apartments 1-5, Person B gets apartments 6-10.</p>
-                    <div class="example">
-                        <strong>Pros:</strong> Simple and fast
-                        <strong>Cons:</strong> Wastes space (fragmentation)
-                    </div>
+                    <h3>3.2 Process Control Block (PCB)</h3>
+                    <p>Data structure containing information about a process:</p>
+                    <ul>
+                        <li>Process ID (PID)</li>
+                        <li>Program counter</li>
+                        <li>CPU registers</li>
+                        <li>Memory management information</li>
+                        <li>I/O status information</li>
+                        <li>Accounting information</li>
+                    </ul>
+
+                    <h3>3.3 Process Scheduling</h3>
+                    <p>Determining which process gets CPU time.</p>
+
+                    <h4>Scheduling Queues</h4>
+                    <ul>
+                        <li><strong>Job Queue:</strong> All processes in system</li>
+                        <li><strong>Ready Queue:</strong> Processes ready to execute</li>
+                        <li><strong>Device Queue:</strong> Processes waiting for I/O</li>
+                    </ul>
+
+                    <h4>Schedulers</h4>
+                    <ul>
+                        <li><strong>Long-term Scheduler:</strong> Selects processes for ready queue (job scheduler)</li>
+                        <li><strong>Medium-term Scheduler:</strong> Swaps processes between memory and disk</li>
+                        <li><strong>Short-term Scheduler:</strong> Selects process from ready queue for CPU (dispatcher)</li>
+                    </ul>
+
+                    <h3>3.4 Context Switching</h3>
+                    <p>Process of saving state of current process and loading state of next process</p>
+                    <ul>
+                        <li>Occurs when process yields CPU</li>
+                        <li>Involves saving/restoring PCB</li>
+                        <li>Pure overhead - no useful work done</li>
+                    </ul>
+
+                    <h3>3.5 UNIX Programming</h3>
+                    <p><strong>Child Process Creation:</strong> Creating new processes from existing ones</p>
+                    <p><strong>Fork():</strong> System call that creates a new process (child) identical to parent</p>
+                    <ul>
+                        <li>Returns 0 to child, child PID to parent</li>
+                        <li>Both processes continue from fork() call</li>
+                        <li>Child inherits parent's memory space</li>
+                    </ul>
+
+                    <p><strong>Process Invocation with Exec():</strong> System call that replaces process image with new program</p>
+                    <ul>
+                        <li>Loads new program into memory</li>
+                        <li>Replaces current process image</li>
+                        <li>Does not create new process</li>
+                    </ul>
+
+                    <h3>3.6 Orphan and Zombie Processes</h3>
+                    <p><strong>Orphan Process:</strong> Child process whose parent has terminated</p>
+                    <p><strong>Zombie Process:</strong> Child process that has terminated but parent hasn't collected its exit status</p>
                 </div>
 
-                <div class="topic">
-                    <h3>3.2 Segmentation</h3>
-                    <p><strong>What is it?</strong> Memory divided into logical pieces (code, data, stack).</p>
-                    <p><strong>Real-world example:</strong> A house with rooms. Living room, bedroom, kitchen - each serves a purpose.</p>
-                    <div class="example">
-                        <strong>Benefits:</strong>
-                        <ul>
-                            <li>Makes sense logically</li>
-                            <li>Easy to protect different parts</li>
-                            <li>Can share segments between programs</li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- Quiz for Chapter 3 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 3</h3>
+                    <div class="quiz" id="quiz3">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> What is the purpose of the Process Control Block (PCB)?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) Execute process instructions</label>
+                                <label><input type="radio" name="q1" value="b"> b) Store process information</label>
+                                <label><input type="radio" name="q1" value="c"> c) Manage memory allocation</label>
+                                <label><input type="radio" name="q1" value="d"> d) Handle I/O operations</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Store process information</p>
+                        </div>
 
-                <div class="topic">
-                    <h3>3.3 Paging</h3>
-                    <p><strong>What is it?</strong> Memory divided into fixed-size pages (usually 4KB).</p>
-                    <p><strong>Real-world example:</strong> A notebook with pages. Each page is the same size. You can use pages in any order.</p>
-                    <div class="example">
-                        <strong>Key Idea:</strong>
-                        <pre>
-Logical Address = Page Number + Offset
-Physical Address = Frame Number + Offset
-                        </pre>
-                    </div>
-                </div>
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What does the fork() system call return to the parent process?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) 0</label>
+                                <label><input type="radio" name="q2" value="b"> b) -1</label>
+                                <label><input type="radio" name="q2" value="c"> c) Child process ID</label>
+                                <label><input type="radio" name="q2" value="d"> d) Parent process ID</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) Child process ID</p>
+                        </div>
 
-                <div class="topic">
-                    <h3>3.4 Paged-Segmentation</h3>
-                    <p><strong>What is it?</strong> Combines paging and segmentation. Segments are divided into pages.</p>
-                    <p><strong>Best of both worlds:</strong> Logical organization of segmentation + efficiency of paging</p>
-                </div>
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> Which scheduler selects processes for the ready queue?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) Short-term scheduler</label>
+                                <label><input type="radio" name="q3" value="b"> b) Medium-term scheduler</label>
+                                <label><input type="radio" name="q3" value="c"> c) Long-term scheduler</label>
+                                <label><input type="radio" name="q3" value="d"> d) I/O scheduler</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) Long-term scheduler</p>
+                        </div>
 
-                <div class="topic">
-                    <h3>3.5 Fragmentation</h3>
-                    <p><strong>External Fragmentation:</strong> Free memory scattered everywhere. Total free space exists, but it's not continuous.</p>
-                    <div class="example">
-                        <strong>Example:</strong>
-                        <pre>
-Memory: [Used][Free 2KB][Used][Free 3KB][Used][Free 1KB]
-Total free: 6KB, but can't fit a 5KB program!
-                        </pre>
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What is a zombie process?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) A process that is running</label>
+                                <label><input type="radio" name="q4" value="b"> b) A process waiting for I/O</label>
+                                <label><input type="radio" name="q4" value="c"> c) A terminated process whose parent hasn't collected its exit status</label>
+                                <label><input type="radio" name="q4" value="d"> d) A process without a parent</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) A terminated process whose parent hasn't collected its exit status</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What does exec() do?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) Creates a new process</label>
+                                <label><input type="radio" name="q5" value="b"> b) Replaces process image with new program</label>
+                                <label><input type="radio" name="q5" value="c"> c) Terminates a process</label>
+                                <label><input type="radio" name="q5" value="d"> d) Switches process state</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Replaces process image with new program</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz3', ['b', 'c', 'c', 'c', 'b'])">Submit Quiz</button>
                     </div>
-                    <p><strong>Internal Fragmentation:</strong> Allocated memory is bigger than needed. Wasted space inside the allocation.</p>
                 </div>
             </section>
 
-            <!-- Chapter 4: Virtual Memory -->
-            <section id="virtual" class="chapter">
-                <h2>Chapter 4: Virtual Memory</h2>
-                <p class="intro">Virtual memory lets programs use more memory than physically available. The OS swaps data between RAM and disk automatically!</p>
+            <!-- Chapter 4: Interprocess Communication -->
+            <section id="chapter4" class="chapter">
+                <h2>Chapter 4: Interprocess Communication (IPC)</h2>
+                
+                <div class="section-content">
+                    <h3>4.1 IPC Methods</h3>
+                    <p>Mechanisms for processes to communicate and synchronize:</p>
 
-                <div class="topic">
-                    <h3>4.1 What is Virtual Memory?</h3>
-                    <p><strong>Simple Idea:</strong> Programs think they have tons of memory. The OS manages what's actually in RAM vs. on disk.</p>
-                    <p><strong>Real-world example:</strong> Your computer has 8GB RAM but can run programs needing 100GB total. How? Some data is on the hard drive.</p>
+                    <h4>Anonymous Pipes</h4>
+                    <p>One-way communication channel between related processes</p>
+                    <ul>
+                        <li>Created with pipe() system call</li>
+                        <li>Unidirectional data flow</li>
+                        <li>Used for parent-child communication</li>
+                        <li>Data lost when pipe is closed</li>
+                    </ul>
+
+                    <h4>Shared Memory</h4>
+                    <p>Multiple processes access common memory region</p>
+                    <ul>
+                        <li>Fastest IPC method</li>
+                        <li>Requires synchronization mechanisms</li>
+                        <li>Processes must coordinate access</li>
+                        <li>System calls: shmget(), shmat(), shmdt()</li>
+                    </ul>
+
+                    <h4>Other IPC Methods</h4>
+                    <ul>
+                        <li><strong>Named Pipes (FIFOs):</strong> Bidirectional communication</li>
+                        <li><strong>Message Queues:</strong> Asynchronous message passing</li>
+                        <li><strong>Sockets:</strong> Network communication</li>
+                        <li><strong>Signals:</strong> Asynchronous notifications</li>
+                    </ul>
+
+                    <h3>4.2 IPC Examples</h3>
+                    <p>Practical examples of IPC implementation in UNIX systems</p>
+                    <ul>
+                        <li>Producer-consumer problem using pipes</li>
+                        <li>Shared memory with semaphores</li>
+                        <li>Message passing between processes</li>
+                    </ul>
                 </div>
 
-                <div class="topic">
-                    <h3>4.2 Demand Paging</h3>
-                    <p><strong>What is it?</strong> Only load data into RAM when the program needs it.</p>
-                    <div class="example">
-                        <strong>How it works:</strong>
-                        <pre>
-1. Program accesses memory location
-2. Location not in RAM → Page Fault!
-3. OS loads page from disk to RAM
-4. Program continues
-                        </pre>
+                <!-- Quiz for Chapter 4 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 4</h3>
+                    <div class="quiz" id="quiz4">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> Which IPC method is the fastest?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) Pipes</label>
+                                <label><input type="radio" name="q1" value="b"> b) Message queues</label>
+                                <label><input type="radio" name="q1" value="c"> c) Shared memory</label>
+                                <label><input type="radio" name="q1" value="d"> d) Sockets</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) Shared memory</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What is the main characteristic of anonymous pipes?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Bidirectional communication</label>
+                                <label><input type="radio" name="q2" value="b"> b) One-way communication</label>
+                                <label><input type="radio" name="q2" value="c"> c) Network communication</label>
+                                <label><input type="radio" name="q2" value="d"> d) Asynchronous messaging</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) One-way communication</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> Which system call creates shared memory?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) pipe()</label>
+                                <label><input type="radio" name="q3" value="b"> b) fork()</label>
+                                <label><input type="radio" name="q3" value="c"> c) shmget()</label>
+                                <label><input type="radio" name="q3" value="d"> d) exec()</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) shmget()</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What is a disadvantage of shared memory IPC?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) Slow performance</label>
+                                <label><input type="radio" name="q4" value="b"> b) Requires synchronization</label>
+                                <label><input type="radio" name="q4" value="c"> c) Limited data size</label>
+                                <label><input type="radio" name="q4" value="d"> d) Only for network communication</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Requires synchronization</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> Which IPC method uses shmat()?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) Pipes</label>
+                                <label><input type="radio" name="q5" value="b"> b) Message queues</label>
+                                <label><input type="radio" name="q5" value="c"> c) Shared memory</label>
+                                <label><input type="radio" name="q5" value="d"> d) Sockets</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) Shared memory</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz4', ['c', 'b', 'c', 'b', 'c'])">Submit Quiz</button>
                     </div>
-                </div>
-
-                <div class="topic">
-                    <h3>4.3 Page Replacement Algorithms</h3>
-                    <p><strong>The Problem:</strong> RAM is full. Need to load a new page. Which old page should we remove?</p>
-                    <div class="example">
-                        <strong>Three Popular Algorithms:</strong>
-                        <ul>
-                            <li><strong>FIFO (First-In-First-Out):</strong> Remove the oldest page. Simple but not smart.</li>
-                            <li><strong>LRU (Least Recently Used):</strong> Remove the page not used for longest time. Better!</li>
-                            <li><strong>LFU (Least Frequently Used):</strong> Remove the page used least often. Also good!</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>4.4 Performance of Virtual Memory</h3>
-                    <p><strong>Formula:</strong> Effective Access Time (EAT)</p>
-                    <div class="example">
-                        <pre>
-EAT = (1 - p) × m + p × (d + m)
-
-p = page fault rate (0 to 1)
-m = memory access time (fast, ~100 ns)
-d = disk access time (slow, ~8 ms)
-
-Example: If p = 0.001 (0.1% page faults)
-EAT = 0.999 × 100 + 0.001 × 8100 = 107 ns
-                        </pre>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>4.5 Thrashing</h3>
-                    <p><strong>What is it?</strong> System spends more time swapping pages than actually running programs.</p>
-                    <p><strong>Real-world example:</strong> Your computer is constantly using the hard drive, programs run very slowly.</p>
-                    <div class="example">
-                        <strong>Causes:</strong>
-                        <ul>
-                            <li>Too many programs running</li>
-                            <li>Not enough RAM</li>
-                            <li>Poor page replacement algorithm</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="topic">
-                    <h3>4.6 Copy-on-Write</h3>
-                    <p><strong>What is it?</strong> When a program creates a copy, don't actually copy data yet. Only copy when data is modified.</p>
-                    <p><strong>Real-world example:</strong> Making a photocopy. Don't copy everything - only copy the pages someone changes.</p>
-                </div>
-
-                <div class="topic">
-                    <h3>4.7 Non-Uniform Memory Access (NUMA)</h3>
-                    <p><strong>What is it?</strong> In multi-processor systems, some memory is closer to some processors.</p>
-                    <p><strong>Real-world example:</strong> In an apartment building, the mailbox near your door is faster to access than one far away.</p>
                 </div>
             </section>
-        </div>
-    </main>
+
+            <!-- Chapter 5: CPU Scheduling -->
+            <section id="chapter5" class="chapter">
+                <h2>Chapter 5: CPU Scheduling</h2>
+                
+                <div class="section-content">
+                    <h3>5.1 Basic Concepts</h3>
+                    <p>CPU scheduling is the process of determining which process gets CPU time.</p>
+
+                    <h3>5.2 CPU I/O Burst Cycle</h3>
+                    <p>Process alternates between CPU execution and I/O operations</p>
+                    <ul>
+                        <li><strong>CPU Burst:</strong> Time process uses CPU</li>
+                        <li><strong>I/O Burst:</strong> Time process waits for I/O</li>
+                        <li>Scheduler must manage these bursts efficiently</li>
+                    </ul>
+
+                    <h3>5.3 Preemptive vs Non-preemptive Scheduling</h3>
+                    <p><strong>Non-preemptive:</strong> Process runs until it yields CPU voluntarily</p>
+                    <p><strong>Preemptive:</strong> OS can interrupt process and assign CPU to another</p>
+
+                    <h3>5.4 Scheduling Criteria</h3>
+                    <ul>
+                        <li><strong>CPU Utilization:</strong> Percentage of time CPU is busy</li>
+                        <li><strong>Throughput:</strong> Number of processes completed per unit time</li>
+                        <li><strong>Turnaround Time:</strong> Time from submission to completion</li>
+                        <li><strong>Waiting Time:</strong> Total time process spends in ready queue</li>
+                        <li><strong>Response Time:</strong> Time from submission to first response</li>
+                    </ul>
+
+                    <h3>5.5 Scheduling Algorithms</h3>
+                    
+                    <h4>First-Come, First-Served (FCFS)</h4>
+                    <p>Processes executed in order they arrive</p>
+                    <ul>
+                        <li>Simple to implement</li>
+                        <li>Non-preemptive</li>
+                        <li>Convoy effect (short jobs wait for long ones)</li>
+                    </ul>
+
+                    <h4>Shortest-Job-First (SJF)</h4>
+                    <p>Process with shortest CPU burst executes first</p>
+                    <ul>
+                        <li>Minimizes average waiting time</li>
+                        <li>Difficult to predict burst time</li>
+                        <li>Can starve long processes</li>
+                    </ul>
+
+                    <h4>Priority Scheduling</h4>
+                    <p>Each process assigned priority; higher priority executes first</p>
+                    <ul>
+                        <li>Flexible and widely used</li>
+                        <li>Risk of starvation for low-priority processes</li>
+                        <li>Solution: aging (increase priority over time)</li>
+                    </ul>
+
+                    <h4>Round-Robin Scheduling</h4>
+                    <p>Each process gets fixed time slice (quantum)</p>
+                    <ul>
+                        <li>Fair allocation of CPU time</li>
+                        <li>Preemptive</li>
+                        <li>Performance depends on quantum size</li>
+                    </ul>
+
+                    <h4>Multilevel Queue Scheduling</h4>
+                    <p>Ready queue divided into separate queues for different process types</p>
+                    <ul>
+                        <li>Each queue has own scheduling algorithm</li>
+                        <li>Fixed priority between queues</li>
+                    </ul>
+
+                    <h4>Multilevel Feedback Queue Scheduling</h4>
+                    <p>Processes can move between queues based on behavior</p>
+                    <ul>
+                        <li>Most flexible scheduling algorithm</li>
+                        <li>Adapts to process characteristics</li>
+                        <li>Complex to implement</li>
+                    </ul>
+                </div>
+
+                <!-- Quiz for Chapter 5 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 5</h3>
+                    <div class="quiz" id="quiz5">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> Which scheduling algorithm minimizes average waiting time?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) FCFS</label>
+                                <label><input type="radio" name="q1" value="b"> b) SJF</label>
+                                <label><input type="radio" name="q1" value="c"> c) Round-Robin</label>
+                                <label><input type="radio" name="q1" value="d"> d) Priority</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) SJF</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What is the main disadvantage of FCFS scheduling?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Complex to implement</label>
+                                <label><input type="radio" name="q2" value="b"> b) Convoy effect</label>
+                                <label><input type="radio" name="q2" value="c"> c) Starvation of processes</label>
+                                <label><input type="radio" name="q2" value="d"> d) High context switching</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Convoy effect</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> What is a CPU burst?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) Time process waits for I/O</label>
+                                <label><input type="radio" name="q3" value="b"> b) Time process uses CPU</label>
+                                <label><input type="radio" name="q3" value="c"> c) Time process is in ready queue</label>
+                                <label><input type="radio" name="q3" value="d"> d) Time for context switch</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Time process uses CPU</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> Which scheduling algorithm is preemptive?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) FCFS</label>
+                                <label><input type="radio" name="q4" value="b"> b) SJF</label>
+                                <label><input type="radio" name="q4" value="c"> c) Round-Robin</label>
+                                <label><input type="radio" name="q4" value="d"> d) Non-preemptive priority</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) Round-Robin</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What is the advantage of multilevel feedback queue scheduling?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) Simple to implement</label>
+                                <label><input type="radio" name="q5" value="b"> b) Adapts to process characteristics</label>
+                                <label><input type="radio" name="q5" value="c"> c) Prevents starvation completely</label>
+                                <label><input type="radio" name="q5" value="d"> d) Minimizes context switches</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Adapts to process characteristics</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz5', ['b', 'b', 'b', 'c', 'b'])">Submit Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 6: Threads -->
+            <section id="chapter6" class="chapter">
+                <h2>Chapter 6: Threads</h2>
+                
+                <div class="section-content">
+                    <h3>6.1 What is a Thread?</h3>
+                    <p>A thread is the smallest unit of execution within a process. It's a lightweight process that shares memory with other threads in the same process.</p>
+
+                    <h3>6.2 Single-threaded vs Multithreaded Processes</h3>
+                    <p><strong>Single-threaded:</strong> One thread of execution per process</p>
+                    <p><strong>Multithreaded:</strong> Multiple threads within same process</p>
+                    <ul>
+                        <li>Threads share memory space</li>
+                        <li>Faster context switching between threads</li>
+                        <li>Easier communication between threads</li>
+                        <li>Requires synchronization</li>
+                    </ul>
+
+                    <h3>6.3 Parallelism</h3>
+                    <p><strong>Data Parallelism:</strong> Same operation on different data elements</p>
+                    <p><strong>Task Parallelism:</strong> Different operations on same or different data</p>
+
+                    <h3>6.4 Multithreading Models</h3>
+                    
+                    <h4>Many-to-One Model</h4>
+                    <p>Many user-level threads mapped to one kernel thread</p>
+                    <ul>
+                        <li>Efficient context switching</li>
+                        <li>One blocking thread blocks all threads</li>
+                        <li>Cannot use multiprocessor</li>
+                    </ul>
+
+                    <h4>One-to-One Model</h4>
+                    <p>Each user thread mapped to kernel thread</p>
+                    <ul>
+                        <li>Better concurrency</li>
+                        <li>More overhead</li>
+                        <li>Can use multiprocessor</li>
+                        <li>Examples: Windows, Linux</li>
+                    </ul>
+
+                    <h4>Many-to-Many Model</h4>
+                    <p>Many user threads mapped to many kernel threads</p>
+                    <ul>
+                        <li>Best of both worlds</li>
+                        <li>More complex to implement</li>
+                        <li>Examples: Solaris, HP-UX</li>
+                    </ul>
+
+                    <h3>6.5 UNIX Threading</h3>
+                    <p><strong>Thread Libraries:</strong> POSIX Threads (Pthreads)</p>
+                    
+                    <h4>Pthreads Creation</h4>
+                    <p>pthread_create() creates new thread</p>
+                    <ul>
+                        <li>Specifies thread function</li>
+                        <li>Passes arguments to thread</li>
+                    </ul>
+
+                    <h4>Parameter Passing to Threads</h4>
+                    <p>Arguments passed via void pointer</p>
+
+                    <h4>Returning Values from Threads</h4>
+                    <p>pthread_join() waits for thread completion and retrieves return value</p>
+
+                    <h3>6.6 Threading Issues</h3>
+                    <p><strong>Thread Cancellation:</strong> Terminating thread before completion</p>
+                    <p><strong>Implicit Threading:</strong> Compiler/runtime creates threads</p>
+                    <p><strong>Thread Pools:</strong> Pre-created threads waiting for work</p>
+                </div>
+
+                <!-- Quiz for Chapter 6 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 6</h3>
+                    <div class="quiz" id="quiz6">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> What is the main advantage of multithreading?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) Reduced memory usage</label>
+                                <label><input type="radio" name="q1" value="b"> b) Faster context switching and easier communication</label>
+                                <label><input type="radio" name="q1" value="c"> c) Simpler programming</label>
+                                <label><input type="radio" name="q1" value="d"> d) Better security</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Faster context switching and easier communication</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> Which multithreading model is used in Linux?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Many-to-One</label>
+                                <label><input type="radio" name="q2" value="b"> b) One-to-One</label>
+                                <label><input type="radio" name="q2" value="c"> c) Many-to-Many</label>
+                                <label><input type="radio" name="q2" value="d"> d) None of the above</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) One-to-One</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> What is a disadvantage of the Many-to-One model?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) High overhead</label>
+                                <label><input type="radio" name="q3" value="b"> b) One blocking thread blocks all threads</label>
+                                <label><input type="radio" name="q3" value="c"> c) Complex implementation</label>
+                                <label><input type="radio" name="q3" value="d"> d) Cannot share memory</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) One blocking thread blocks all threads</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What function creates a new thread in Pthreads?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) pthread_start()</label>
+                                <label><input type="radio" name="q4" value="b"> b) pthread_new()</label>
+                                <label><input type="radio" name="q4" value="c"> c) pthread_create()</label>
+                                <label><input type="radio" name="q4" value="d"> d) pthread_init()</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) pthread_create()</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What is a thread pool?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) A collection of processes</label>
+                                <label><input type="radio" name="q5" value="b"> b) Pre-created threads waiting for work</label>
+                                <label><input type="radio" name="q5" value="c"> c) A synchronization mechanism</label>
+                                <label><input type="radio" name="q5" value="d"> d) A memory management technique</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Pre-created threads waiting for work</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz6', ['b', 'b', 'b', 'c', 'b'])">Submit Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 7: Process Synchronization -->
+            <section id="chapter7" class="chapter">
+                <h2>Chapter 7: Process Synchronization</h2>
+                
+                <div class="section-content">
+                    <h3>7.1 The Critical Section Problem</h3>
+                    <p>Multiple processes accessing shared resources can lead to inconsistent data. The critical section is code that accesses shared resources.</p>
+                    <p><strong>Requirements for solution:</strong></p>
+                    <ul>
+                        <li>Mutual Exclusion: Only one process in critical section</li>
+                        <li>Progress: Process not in critical section cannot block others</li>
+                        <li>Bounded Waiting: Process waits finite time to enter</li>
+                    </ul>
+
+                    <h3>7.2 Solutions to Critical Section Problem</h3>
+
+                    <h4>Software Solutions</h4>
+                    <p><strong>Peterson's Solution:</strong> Uses flags and turn variable</p>
+                    <ul>
+                        <li>Guarantees mutual exclusion</li>
+                        <li>Works for two processes</li>
+                        <li>Busy waiting (inefficient)</li>
+                    </ul>
+
+                    <h4>Hardware Solutions</h4>
+                    <p><strong>Disabling Interrupts:</strong> Disable interrupts in critical section</p>
+                    <ul>
+                        <li>Simple but inefficient</li>
+                        <li>Not suitable for multiprocessor</li>
+                    </ul>
+
+                    <p><strong>Atomic Instructions:</strong> Test-and-set, compare-and-swap</p>
+                    <ul>
+                        <li>Hardware-supported indivisible operations</li>
+                        <li>Efficient and reliable</li>
+                    </ul>
+
+                    <h3>7.3 Synchronization Primitives</h3>
+
+                    <h4>Mutex (Mutual Exclusion Lock)</h4>
+                    <p>Binary lock - locked or unlocked</p>
+                    <ul>
+                        <li>lock() - acquire mutex</li>
+                        <li>unlock() - release mutex</li>
+                        <li>Prevents multiple threads from accessing resource</li>
+                    </ul>
+
+                    <h4>Semaphore</h4>
+                    <p>Integer variable with two atomic operations</p>
+                    <ul>
+                        <li><strong>wait() (P):</strong> Decrement semaphore, wait if negative</li>
+                        <li><strong>signal() (V):</strong> Increment semaphore</li>
+                        <li><strong>Binary Semaphore:</strong> Values 0 and 1 (like mutex)</li>
+                        <li><strong>Counting Semaphore:</strong> Any non-negative value</li>
+                    </ul>
+
+                    <h3>7.4 Deadlock and Starvation</h3>
+                    <p><strong>Deadlock:</strong> Two or more processes waiting indefinitely for each other</p>
+                    <p><strong>Starvation:</strong> Process never gets CPU time</p>
+                </div>
+
+                <!-- Quiz for Chapter 7 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 7</h3>
+                    <div class="quiz" id="quiz7">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> What is the critical section problem?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) A section of code that is always critical</label>
+                                <label><input type="radio" name="q1" value="b"> b) Multiple processes accessing shared resources can lead to inconsistent data</label>
+                                <label><input type="radio" name="q1" value="c"> c) A section that must be executed first</label>
+                                <label><input type="radio" name="q1" value="d"> d) A security issue in the OS</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Multiple processes accessing shared resources can lead to inconsistent data</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What does Peterson's solution use?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Interrupts</label>
+                                <label><input type="radio" name="q2" value="b"> b) Flags and turn variable</label>
+                                <label><input type="radio" name="q2" value="c"> c) Semaphores</label>
+                                <label><input type="radio" name="q2" value="d"> d) Mutexes</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Flags and turn variable</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> What is a mutex?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) A counting semaphore</label>
+                                <label><input type="radio" name="q3" value="b"> b) A binary lock</label>
+                                <label><input type="radio" name="q3" value="c"> c) A process state</label>
+                                <label><input type="radio" name="q3" value="d"> d) A scheduling algorithm</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) A binary lock</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What does the wait() operation do on a semaphore?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) Increment the semaphore</label>
+                                <label><input type="radio" name="q4" value="b"> b) Decrement the semaphore, wait if negative</label>
+                                <label><input type="radio" name="q4" value="c"> c) Lock the semaphore</label>
+                                <label><input type="radio" name="q4" value="d"> d) Reset the semaphore</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Decrement the semaphore, wait if negative</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What is deadlock?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) A process that is not running</label>
+                                <label><input type="radio" name="q5" value="b"> b) Two or more processes waiting indefinitely for each other</label>
+                                <label><input type="radio" name="q5" value="c"> c) A process that never gets CPU time</label>
+                                <label><input type="radio" name="q5" value="d"> d) A critical section error</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Two or more processes waiting indefinitely for each other</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz7', ['b', 'b', 'b', 'b', 'b'])">Submit Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 8: Memory Management -->
+            <section id="chapter8" class="chapter">
+                <h2>Chapter 8: Memory Management</h2>
+                
+                <div class="section-content">
+                    <h3>8.1 What is Memory Management?</h3>
+                    <p><strong>Simple Analogy:</strong> Think of computer memory like a library. The OS is the librarian who decides where to place books (programs) and how to organize them so they can be quickly found and retrieved.</p>
+                    <p>Memory management is the process of managing the computer's main memory (RAM). It allocates memory to processes when they need it and deallocates it when they're done.</p>
+
+                    <h3>8.2 Paging - The Modern Approach</h3>
+                    <p><strong>What is Paging?</strong> Paging divides both logical memory (what programs see) and physical memory (actual RAM) into fixed-size chunks called <strong>pages</strong> and <strong>frames</strong>.</p>
+                    
+                    <h4>Key Terms Explained Simply:</h4>
+                    <ul>
+                        <li><strong>Page:</strong> A fixed-size block of logical memory (typically 4KB). Think of it as a page in a book.</li>
+                        <li><strong>Frame:</strong> A fixed-size block of physical memory matching page size. Think of it as a shelf in the library.</li>
+                        <li><strong>Logical Memory:</strong> The memory address space that a program sees (0 to max address). Like the book's page numbers.</li>
+                        <li><strong>Physical Memory:</strong> The actual RAM addresses where data is stored. Like the actual shelves in the library.</li>
+                        <li><strong>Page Table:</strong> A mapping table that translates logical page numbers to physical frame numbers. Like a library catalog.</li>
+                        <li><strong>TLB (Translation Lookaside Buffer):</strong> A fast cache that stores recent page-to-frame mappings. Like remembering where you just found a book.</li>
+                    </ul>
+
+                    <h3>8.3 How Paging Works - Step by Step</h3>
+                    <p><strong>Example:</strong> A program needs to access memory address 4096 (in logical memory)</p>
+                    <ol>
+                        <li>CPU divides address into: Page Number (1) and Offset (0)</li>
+                        <li>Check TLB for quick lookup - if found, use it</li>
+                        <li>If not in TLB, consult Page Table</li>
+                        <li>Page Table says: Page 1 is in Frame 5</li>
+                        <li>Calculate physical address: (Frame 5 × 4096) + Offset = 20480</li>
+                        <li>Access data at physical address 20480</li>
+                        <li>Add mapping to TLB for next time</li>
+                    </ol>
+
+                    <h3>8.4 Internal vs External Fragmentation</h3>
+                    <p><strong>Internal Fragmentation:</strong> Wasted space INSIDE allocated memory</p>
+                    <ul>
+                        <li><strong>Example:</strong> A program needs 5KB but gets allocated one 4KB page + one 4KB page = 8KB total. 3KB is wasted inside the allocated space.</li>
+                        <li><strong>Cause:</strong> Fixed page size doesn't match exact program needs</li>
+                        <li><strong>Paging Impact:</strong> Minimal because pages are small (usually 4KB)</li>
+                    </ul>
+
+                    <p><strong>External Fragmentation:</strong> Wasted space BETWEEN allocated memory blocks</p>
+                    <ul>
+                        <li><strong>Example:</strong> Memory layout: [Program A: 10KB] [Free: 2KB] [Program B: 10KB] [Free: 3KB]. The 2KB and 3KB gaps can't be used if a program needs 5KB.</li>
+                        <li><strong>Cause:</strong> Programs are loaded and removed, leaving scattered free spaces</li>
+                        <li><strong>Paging Impact:</strong> Paging ELIMINATES external fragmentation because pages are fixed-size and can go anywhere</li>
+                    </ul>
+
+                    <h3>8.5 Advantages of Paging</h3>
+                    <ul>
+                        <li>Eliminates external fragmentation</li>
+                        <li>Simple to implement and manage</li>
+                        <li>Allows programs larger than physical memory (with virtual memory)</li>
+                        <li>Easy memory allocation and deallocation</li>
+                    </ul>
+
+                    <h3>8.6 Paging Structure Diagram</h3>
+                    <p><strong>Visual Representation:</strong></p>
+                    <div class="diagram-box">
+                        <p><strong>Logical Memory (Program's View)</strong></p>
+                        <p>Page 0 [0-4095] → Frame 3</p>
+                        <p>Page 1 [4096-8191] → Frame 5</p>
+                        <p>Page 2 [8192-12287] → Frame 2</p>
+                        <p>Page 3 [12288-16383] → Frame 7</p>
+                        <p style="margin-top: 15px; border-top: 2px solid #ccc; padding-top: 15px;"><strong>Physical Memory (Actual RAM)</strong></p>
+                        <p>Frame 0: [Empty]</p>
+                        <p>Frame 1: [Empty]</p>
+                        <p>Frame 2: [Page 2 data]</p>
+                        <p>Frame 3: [Page 0 data]</p>
+                        <p>Frame 4: [Empty]</p>
+                        <p>Frame 5: [Page 1 data]</p>
+                        <p>Frame 6: [Empty]</p>
+                        <p>Frame 7: [Page 3 data]</p>
+                    </div>
+                </div>
+
+                <!-- Quiz for Chapter 8 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 8</h3>
+                    <div class="quiz" id="quiz8">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> What is the main purpose of paging?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) To increase CPU speed</label>
+                                <label><input type="radio" name="q1" value="b"> b) To manage memory efficiently and eliminate external fragmentation</label>
+                                <label><input type="radio" name="q1" value="c"> c) To reduce power consumption</label>
+                                <label><input type="radio" name="q1" value="d"> d) To improve I/O performance</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) To manage memory efficiently and eliminate external fragmentation</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What is the difference between a page and a frame?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Page is physical, frame is logical</label>
+                                <label><input type="radio" name="q2" value="b"> b) Page is logical memory, frame is physical memory</label>
+                                <label><input type="radio" name="q2" value="c"> c) They are the same thing</label>
+                                <label><input type="radio" name="q2" value="d"> d) Pages are larger than frames</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Page is logical memory, frame is physical memory</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> What is internal fragmentation?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) Wasted space between allocated blocks</label>
+                                <label><input type="radio" name="q3" value="b"> b) Wasted space inside allocated memory</label>
+                                <label><input type="radio" name="q3" value="c"> c) Fragmented hard disk</label>
+                                <label><input type="radio" name="q3" value="d"> d) Broken memory modules</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Wasted space inside allocated memory</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What does the Page Table do?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) Stores program data</label>
+                                <label><input type="radio" name="q4" value="b"> b) Maps logical page numbers to physical frame numbers</label>
+                                <label><input type="radio" name="q4" value="c"> c) Manages CPU scheduling</label>
+                                <label><input type="radio" name="q4" value="d"> d) Handles I/O operations</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Maps logical page numbers to physical frame numbers</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What is the TLB?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) A type of memory chip</label>
+                                <label><input type="radio" name="q5" value="b"> b) A fast cache for page-to-frame mappings</label>
+                                <label><input type="radio" name="q5" value="c"> c) A scheduling algorithm</label>
+                                <label><input type="radio" name="q5" value="d"> d) A disk storage device</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) A fast cache for page-to-frame mappings</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz8', ['b', 'b', 'b', 'b', 'b'])">Submit Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 9: Deadlock -->
+            <section id="chapter9" class="chapter">
+                <h2>Chapter 9: Deadlock</h2>
+                
+                <div class="section-content">
+                    <h3>9.1 What is Deadlock?</h3>
+                    <p><strong>Simple Analogy:</strong> Imagine two people in a narrow hallway. Person A is holding a book and wants a pen (which Person B has). Person B is holding a pen and wants the book (which Person A has). Neither can move forward - they're stuck. This is deadlock!</p>
+                    <p>A deadlock occurs when two or more processes are blocked forever, waiting for each other to release resources they need.</p>
+
+                    <h3>9.2 Necessary Conditions for Deadlock</h3>
+                    <p>All four conditions must be present simultaneously for deadlock to occur:</p>
+                    <ul>
+                        <li><strong>1. Mutual Exclusion:</strong> Resource can only be used by one process at a time. (Like a book - only one person can read it)</li>
+                        <li><strong>2. Hold and Wait:</strong> Process holds resources while waiting for others. (Person A holds the book while waiting for the pen)</li>
+                        <li><strong>3. No Preemption:</strong> Resources cannot be forcibly taken away. (You can't just grab the book from Person A)</li>
+                        <li><strong>4. Circular Wait:</strong> Processes form a cycle waiting for each other. (A waits for B, B waits for A)</li>
+                    </ul>
+
+                    <h3>9.3 Deadlock Example - Two Processes</h3>
+                    <p><strong>Process A:</strong></p>
+                    <ol>
+                        <li>Acquires Resource 1 (lock on file A)</li>
+                        <li>Tries to acquire Resource 2 (lock on file B) → BLOCKED</li>
+                    </ol>
+                    <p><strong>Process B:</strong></p>
+                    <ol>
+                        <li>Acquires Resource 2 (lock on file B)</li>
+                        <li>Tries to acquire Resource 1 (lock on file A) → BLOCKED</li>
+                    </ol>
+                    <p><strong>Result:</strong> Both processes are blocked forever! Neither can proceed.</p>
+
+                    <h3>9.4 Deadlock Handling Strategies</h3>
+                    <p><strong>1. Deadlock Prevention:</strong> Ensure one of the four conditions cannot occur</p>
+                    <ul>
+                        <li>Break Circular Wait: Assign resources in order (always request Resource 1 before Resource 2)</li>
+                        <li>Allow Preemption: OS can take back resources if needed</li>
+                    </ul>
+
+                    <p><strong>2. Deadlock Avoidance:</strong> Detect unsafe states before they occur</p>
+                    <ul>
+                        <li>Banker's Algorithm: Before allocating resource, check if system remains safe</li>
+                        <li>Safe State: A state where all processes can complete without deadlock</li>
+                    </ul>
+
+                    <p><strong>3. Deadlock Detection and Recovery:</strong> Allow deadlock to occur, then detect and recover</p>
+                    <ul>
+                        <li>Detect: Check for cycles in resource allocation graph</li>
+                        <li>Recover: Terminate processes or preempt resources</li>
+                    </ul>
+
+                    <p><strong>4. Ignore Deadlock:</strong> (Most common in modern OS)</p>
+                    <ul>
+                        <li>Assume deadlock is rare</li>
+                        <li>Let user restart hung processes</li>
+                        <li>Used by Windows, Linux, macOS</li>
+                    </ul>
+
+                    <h3>9.5 Resource Allocation Graph (RAG)</h3>
+                    <p><strong>What is RAG?</strong> A directed graph showing which processes hold which resources and which processes are waiting for resources.</p>
+                    <ul>
+                        <li><strong>Nodes:</strong> Processes (circles) and Resources (squares)</li>
+                        <li><strong>Edges:</strong> Request edges (process → resource) or Allocation edges (resource → process)</li>
+                        <li><strong>Cycle Detection:</strong> If there's a cycle, deadlock exists</li>
+                    </ul>
+                </div>
+
+                <!-- Quiz for Chapter 9 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 9</h3>
+                    <div class="quiz" id="quiz9">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> Which of the following is NOT a necessary condition for deadlock?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) Mutual exclusion</label>
+                                <label><input type="radio" name="q1" value="b"> b) Hold and wait</label>
+                                <label><input type="radio" name="q1" value="c"> c) High CPU usage</label>
+                                <label><input type="radio" name="q1" value="d"> d) Circular wait</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) High CPU usage</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What does "Hold and Wait" condition mean?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Process waits for CPU</label>
+                                <label><input type="radio" name="q2" value="b"> b) Process holds resources while waiting for others</label>
+                                <label><input type="radio" name="q2" value="c"> c) Process waits in queue</label>
+                                <label><input type="radio" name="q2" value="d"> d) Process holds CPU and memory</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Process holds resources while waiting for others</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> What is the purpose of deadlock prevention?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) To speed up processes</label>
+                                <label><input type="radio" name="q3" value="b"> b) To ensure one of four conditions cannot occur</label>
+                                <label><input type="radio" name="q3" value="c"> c) To detect deadlock early</label>
+                                <label><input type="radio" name="q3" value="d"> d) To recover from deadlock</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) To ensure one of four conditions cannot occur</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What does a cycle in a Resource Allocation Graph indicate?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) Normal operation</label>
+                                <label><input type="radio" name="q4" value="b"> b) Possible deadlock</label>
+                                <label><input type="radio" name="q4" value="c"> c) Resource shortage</label>
+                                <label><input type="radio" name="q4" value="d"> d) CPU overload</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Possible deadlock</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> Which deadlock handling strategy is most commonly used in modern OS?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) Prevention</label>
+                                <label><input type="radio" name="q5" value="b"> b) Avoidance</label>
+                                <label><input type="radio" name="q5" value="c"> c) Detection and recovery</label>
+                                <label><input type="radio" name="q5" value="d"> d) Ignore deadlock</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: d) Ignore deadlock</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz9', ['c', 'b', 'b', 'b', 'd'])">Submit Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 10: Dining Philosophers Problem -->
+            <section id="chapter10" class="chapter">
+                <h2>Chapter 10: The Dining Philosophers Problem</h2>
+                
+                <div class="section-content">
+                    <h3>10.1 Problem Definition</h3>
+                    <p><strong>The Scenario:</strong> Five philosophers sit around a circular table. Between each pair of philosophers is one chopstick (5 chopsticks total). Each philosopher alternates between thinking and eating. To eat, a philosopher needs BOTH chopsticks (left and right).</p>
+                    <p><strong>The Challenge:</strong> Design a synchronization solution so that philosophers can eat without deadlock or starvation.</p>
+
+                    <h3>10.2 Why This is a Problem</h3>
+                    <p><strong>Deadlock Scenario:</strong></p>
+                    <ol>
+                        <li>Philosopher 1 picks up left chopstick</li>
+                        <li>Philosopher 2 picks up left chopstick</li>
+                        <li>Philosopher 3 picks up left chopstick</li>
+                        <li>Philosopher 4 picks up left chopstick</li>
+                        <li>Philosopher 5 picks up left chopstick</li>
+                        <li>Now each philosopher tries to pick up their right chopstick → ALL BLOCKED!</li>
+                    </ol>
+                    <p>All philosophers are waiting for a chopstick held by their neighbor. Nobody can eat. Nobody releases their chopstick. DEADLOCK!</p>
+
+                    <p><strong>Starvation Scenario:</strong> Even without deadlock, some philosophers might never get to eat if others keep hogging the chopsticks.</p>
+
+                    <h3>10.3 Solution 1: Semaphore-Based Solution</h3>
+                    <p><strong>Approach:</strong> Use semaphores to control access to chopsticks</p>
+                    <pre style="background: #f0f0f0; padding: 15px; border-radius: 5px; overflow-x: auto;">
+Semaphore chopstick[5] = {1, 1, 1, 1, 1}; // All available
+
+Philosopher i:
+  while(true) {
+    think();
+    wait(chopstick[i]);           // Pick up left
+    wait(chopstick[(i+1)%5]);     // Pick up right
+    eat();
+    signal(chopstick[i]);         // Put down left
+    signal(chopstick[(i+1)%5]);   // Put down right
+  }
+                    </pre>
+                    <p><strong>Problem:</strong> This still causes deadlock! If all philosophers pick up their left chopstick simultaneously, all are blocked.</p>
+
+                    <h3>10.4 Solution 2: Asymmetric Solution (Prevents Deadlock)</h3>
+                    <p><strong>Approach:</strong> Make one philosopher pick up chopsticks in different order</p>
+                    <pre style="background: #f0f0f0; padding: 15px; border-radius: 5px; overflow-x: auto;">
+Philosopher i (i != 4):
+  while(true) {
+    think();
+    wait(chopstick[i]);           // Pick up left first
+    wait(chopstick[(i+1)%5]);     // Then pick up right
+    eat();
+    signal(chopstick[i]);
+    signal(chopstick[(i+1)%5]);
+  }
+
+Philosopher 4 (different order):
+  while(true) {
+    think();
+    wait(chopstick[0]);           // Pick up right first!
+    wait(chopstick[4]);           // Then pick up left
+    eat();
+    signal(chopstick[0]);
+    signal(chopstick[4]);
+  }
+                    </pre>
+                    <p><strong>Why it works:</strong> Breaking the circular wait condition prevents deadlock!</p>
+
+                    <h3>10.5 Solution 3: Monitor-Based Solution (Most Elegant)</h3>
+                    <p><strong>Approach:</strong> Use a monitor to ensure atomicity</p>
+                    <ul>
+                        <li>Only one philosopher can execute the eating logic at a time</li>
+                        <li>Check if both chopsticks are available before picking them up</li>
+                        <li>If not available, wait; if available, eat immediately</li>
+                    </ul>
+                    <p><strong>Advantages:</strong></p>
+                    <ul>
+                        <li>No deadlock</li>
+                        <li>No starvation (with proper scheduling)</li>
+                        <li>Cleaner, easier to understand</li>
+                    </ul>
+
+                    <h3>10.6 Key Concepts Demonstrated</h3>
+                    <p><strong>This problem teaches:</strong></p>
+                    <ul>
+                        <li><strong>Deadlock:</strong> How circular dependencies cause processes to block</li>
+                        <li><strong>Starvation:</strong> How some processes might never get resources</li>
+                        <li><strong>Race Conditions:</strong> Multiple processes accessing shared resources</li>
+                        <li><strong>Synchronization:</strong> Using semaphores and monitors to coordinate</li>
+                        <li><strong>Resource Allocation:</strong> Managing limited resources among competing processes</li>
+                    </ul>
+
+                    <h3>10.7 Real-World Applications</h3>
+                    <ul>
+                        <li><strong>Database Locks:</strong> Multiple transactions needing multiple table locks</li>
+                        <li><strong>Network Routing:</strong> Packets competing for bandwidth</li>
+                        <li><strong>File Systems:</strong> Multiple processes accessing files</li>
+                        <li><strong>Thread Synchronization:</strong> Threads needing multiple locks</li>
+                    </ul>
+                </div>
+
+                <!-- Quiz for Chapter 10 -->
+                <div class="quiz-section">
+                    <h3>Self-Assessment Quiz - Chapter 10</h3>
+                    <div class="quiz" id="quiz10">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> In the Dining Philosophers problem, how many chopsticks are needed for 5 philosophers?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) 5 chopsticks</label>
+                                <label><input type="radio" name="q1" value="b"> b) 10 chopsticks</label>
+                                <label><input type="radio" name="q1" value="c"> c) 15 chopsticks</label>
+                                <label><input type="radio" name="q1" value="d"> d) 3 chopsticks</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: a) 5 chopsticks</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> What causes deadlock in the naive Dining Philosophers solution?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Too many philosophers</label>
+                                <label><input type="radio" name="q2" value="b"> b) Circular wait - each philosopher holds one chopstick and waits for another</label>
+                                <label><input type="radio" name="q2" value="c"> c) Philosophers thinking too long</label>
+                                <label><input type="radio" name="q2" value="d"> d) Semaphores not working</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Circular wait - each philosopher holds one chopstick and waits for another</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> How does the asymmetric solution prevent deadlock?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) By making philosophers eat faster</label>
+                                <label><input type="radio" name="q3" value="b"> b) By breaking the circular wait condition</label>
+                                <label><input type="radio" name="q3" value="c"> c) By using more chopsticks</label>
+                                <label><input type="radio" name="q3" value="d"> d) By reducing the number of philosophers</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) By breaking the circular wait condition</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> What is the main advantage of the monitor-based solution?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) Uses fewer resources</label>
+                                <label><input type="radio" name="q4" value="b"> b) Ensures atomicity and prevents both deadlock and starvation</label>
+                                <label><input type="radio" name="q4" value="c"> c) Faster execution</label>
+                                <label><input type="radio" name="q4" value="d"> d) Easier to implement</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Ensures atomicity and prevents both deadlock and starvation</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What does the Dining Philosophers problem primarily teach?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) How to cook food</label>
+                                <label><input type="radio" name="q5" value="b"> b) Resource allocation, synchronization, and deadlock handling</label>
+                                <label><input type="radio" name="q5" value="c"> c) Philosophy concepts</label>
+                                <label><input type="radio" name="q5" value="d"> d) Table manners</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Resource allocation, synchronization, and deadlock handling</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quiz10', ['a', 'b', 'b', 'b', 'b'])">Submit Quiz</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Assessment -->
+            <section id="final-quiz" class="chapter">
+                <h2>Final Assessment Quiz</h2>
+                <p>Test your comprehensive understanding of all Operating Systems topics covered in this course.</p>
+                
+                <div class="quiz-section">
+                    <div class="quiz" id="quizFinal">
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> Which of the following is a characteristic of a microkernel architecture?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q1" value="a"> a) All OS services run in kernel mode</label>
+                                <label><input type="radio" name="q1" value="b"> b) Only essential services in kernel; others run as user processes</label>
+                                <label><input type="radio" name="q1" value="c"> c) Fastest OS architecture</label>
+                                <label><input type="radio" name="q1" value="d"> d) Simplest to implement</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Only essential services in kernel; others run as user processes</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> In the process state diagram, which transition occurs when a process is preempted?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q2" value="a"> a) Running → Waiting</label>
+                                <label><input type="radio" name="q2" value="b"> b) Running → Ready</label>
+                                <label><input type="radio" name="q2" value="c"> c) Ready → Running</label>
+                                <label><input type="radio" name="q2" value="d"> d) Waiting → Terminated</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Running → Ready</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> What is the primary purpose of context switching?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q3" value="a"> a) Increase CPU speed</label>
+                                <label><input type="radio" name="q3" value="b"> b) Allow multiple processes to share CPU time</label>
+                                <label><input type="radio" name="q3" value="c"> c) Reduce memory usage</label>
+                                <label><input type="radio" name="q3" value="d"> d) Improve I/O performance</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Allow multiple processes to share CPU time</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> Which scheduling algorithm can lead to starvation of long processes?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q4" value="a"> a) FCFS</label>
+                                <label><input type="radio" name="q4" value="b"> b) Round-Robin</label>
+                                <label><input type="radio" name="q4" value="c"> c) SJF</label>
+                                <label><input type="radio" name="q4" value="d"> d) SCAN</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) SJF</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What is the advantage of using threads over processes?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q5" value="a"> a) Threads use less memory and have faster context switching</label>
+                                <label><input type="radio" name="q5" value="b"> b) Threads are more secure</label>
+                                <label><input type="radio" name="q5" value="c"> c) Threads can run on single processor only</label>
+                                <label><input type="radio" name="q5" value="d"> d) Threads don't require synchronization</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: a) Threads use less memory and have faster context switching</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q6:</strong> What does the fork() system call return to the child process?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q6" value="a"> a) Parent process ID</label>
+                                <label><input type="radio" name="q6" value="b"> b) 0</label>
+                                <label><input type="radio" name="q6" value="c"> c) -1</label>
+                                <label><input type="radio" name="q6" value="d"> d) Child process ID</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) 0</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q7:</strong> Which IPC method is suitable for bidirectional communication?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q7" value="a"> a) Anonymous pipes</label>
+                                <label><input type="radio" name="q7" value="b"> b) Named pipes (FIFOs)</label>
+                                <label><input type="radio" name="q7" value="c"> c) Signals</label>
+                                <label><input type="radio" name="q7" value="d"> d) Shared memory only</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Named pipes (FIFOs)</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q8:</strong> What is the main purpose of semaphores?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q8" value="a"> a) Manage memory allocation</label>
+                                <label><input type="radio" name="q8" value="b"> b) Control access to shared resources</label>
+                                <label><input type="radio" name="q8" value="c"> c) Schedule processes</label>
+                                <label><input type="radio" name="q8" value="d"> d) Handle interrupts</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) Control access to shared resources</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q9:</strong> What is a zombie process?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q9" value="a"> a) A process that is running in background</label>
+                                <label><input type="radio" name="q9" value="b"> b) A terminated process whose parent hasn't collected exit status</label>
+                                <label><input type="radio" name="q9" value="c"> c) A process waiting for I/O</label>
+                                <label><input type="radio" name="q9" value="d"> d) A process without a parent</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: b) A terminated process whose parent hasn't collected exit status</p>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q10:</strong> Which of the following is NOT a scheduling criterion?</p>
+                            <div class="options">
+                                <label><input type="radio" name="q10" value="a"> a) CPU utilization</label>
+                                <label><input type="radio" name="q10" value="b"> b) Throughput</label>
+                                <label><input type="radio" name="q10" value="c"> c) Memory color</label>
+                                <label><input type="radio" name="q10" value="d"> d) Response time</label>
+                            </div>
+                            <p class="correct-answer" style="display:none;">Correct Answer: c) Memory color</p>
+                        </div>
+
+                        <button class="submit-quiz" onclick="submitQuiz('quizFinal', ['b', 'b', 'b', 'c', 'a', 'b', 'b', 'b', 'b', 'c'])">Submit Final Assessment</button>
+                    </div>
+                </div>
+
+                <div class="results-section" id="resultsSection" style="display:none;">
+                    <h3>Your Results</h3>
+                    <div class="results-content">
+                        <p>Total Questions: <span id="totalQuestions">0</span></p>
+                        <p>Correct Answers: <span id="correctAnswers">0</span></p>
+                        <p>Score: <span id="scorePercentage">0</span>%</p>
+                        <div class="score-bar">
+                            <div class="score-fill" id="scoreFill"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
